@@ -9,8 +9,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 import java.io.FileWriter;
 
-import edu.cmu.xings.types.Gene;
-import edu.cmu.xings.types.ID;
+import edu.cmu.deiis.types.Gene;
+import edu.cmu.deiis.types.ID;
 
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.cas.CASException;

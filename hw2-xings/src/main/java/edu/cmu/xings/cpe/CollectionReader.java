@@ -1,6 +1,6 @@
 package edu.cmu.xings.cpe;
 
-import edu.cmu.xings.types.ID;
+import edu.cmu.deiis.types.ID;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
