@@ -26,6 +26,7 @@ import java.util.List;
 
 /**
  * 
+ * 
  * CasConsumer outputs the result of annotation in the required format
  * @author xings
  * 
