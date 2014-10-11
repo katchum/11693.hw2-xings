@@ -10,7 +10,7 @@ import org.apache.uima.jcas.cas.TOP_Type;
 
 
 /** 
- * Updated by JCasGen Wed Oct 08 12:48:56 EDT 2014
+ * Updated by JCasGen Fri Oct 10 21:17:51 EDT 2014
  * XML source: /Users/alfie/git/11693.hw2-xings/hw2-xings/src/main/resources/deiis_types.xml
  * @generated */
 public class Gene extends Annotation {
@@ -74,28 +74,6 @@ public class Gene extends Annotation {
   private void readObject() {/*default - does nothing empty block */}
      
  
-    
-  //*--------------*
-  //* Feature: ID
-
-  /** getter for ID - gets 
-   * @generated
-   * @return value of the feature 
-   */
-  public String getID() {
-    if (Gene_Type.featOkTst && ((Gene_Type)jcasType).casFeat_ID == null)
-      jcasType.jcas.throwFeatMissing("ID", "edu.cmu.deiis.types.Gene");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((Gene_Type)jcasType).casFeatCode_ID);}
-    
-  /** setter for ID - sets  
-   * @generated
-   * @param v value to set into the feature 
-   */
-  public void setID(String v) {
-    if (Gene_Type.featOkTst && ((Gene_Type)jcasType).casFeat_ID == null)
-      jcasType.jcas.throwFeatMissing("ID", "edu.cmu.deiis.types.Gene");
-    jcasType.ll_cas.ll_setStringValue(addr, ((Gene_Type)jcasType).casFeatCode_ID, v);}    
-   
     
   //*--------------*
   //* Feature: start

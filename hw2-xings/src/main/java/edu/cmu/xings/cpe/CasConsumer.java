@@ -29,7 +29,6 @@ import java.util.TreeMap;
 
 /**
  * 
- * 
  * CasConsumer outputs the result of annotation in the required format
  * @author xings
  * 
@@ -39,6 +38,9 @@ public class CasConsumer extends CasConsumer_ImplBase {
   public static final String MIXEDAE = "mixed";
   private List<String> res;
   
+  /**
+   * initialize() 
+   */
   @Override
   public void initialize() {
     res = new ArrayList<String>();
@@ -70,7 +72,7 @@ public class CasConsumer extends CasConsumer_ImplBase {
 //  	String output = String.format("%s|%d %d|%s|%s", id.getID(), gene.getStart(), gene.getEnd(), gene.getName(), gene.getCasProcessorId());
 //  	res.add(output);
     }
-    //sort map by keys
+    // sort map by keys
     TreeMap<String, Gene> sortedmap = new TreeMap<String, Gene>(map);
     //output all the genes in the map
     Iterator<String> keyit = sortedmap.keySet().iterator();

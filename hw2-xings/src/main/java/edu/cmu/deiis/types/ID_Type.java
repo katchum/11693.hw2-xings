@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Wed Oct 08 12:48:56 EDT 2014
+ * Updated by JCasGen Fri Oct 10 21:17:51 EDT 2014
  * @generated */
 public class ID_Type extends Annotation_Type {
   /** @generated 

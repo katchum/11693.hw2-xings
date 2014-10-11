@@ -13,7 +13,7 @@ import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 
 /** 
- * Updated by JCasGen Wed Oct 08 12:48:56 EDT 2014
+ * Updated by JCasGen Fri Oct 10 21:17:51 EDT 2014
  * @generated */
 public class Gene_Type extends Annotation_Type {
   /** @generated 
@@ -44,30 +44,6 @@ public class Gene_Type extends Annotation_Type {
      @modifiable */
   @SuppressWarnings ("hiding")
   public final static boolean featOkTst = JCasRegistry.getFeatOkTst("edu.cmu.deiis.types.Gene");
- 
-  /** @generated */
-  final Feature casFeat_ID;
-  /** @generated */
-  final int     casFeatCode_ID;
-  /** @generated
-   * @param addr low level Feature Structure reference
-   * @return the feature value 
-   */ 
-  public String getID(int addr) {
-        if (featOkTst && casFeat_ID == null)
-      jcas.throwFeatMissing("ID", "edu.cmu.deiis.types.Gene");
-    return ll_cas.ll_getStringValue(addr, casFeatCode_ID);
-  }
-  /** @generated
-   * @param addr low level Feature Structure reference
-   * @param v value to set 
-   */    
-  public void setID(int addr, String v) {
-        if (featOkTst && casFeat_ID == null)
-      jcas.throwFeatMissing("ID", "edu.cmu.deiis.types.Gene");
-    ll_cas.ll_setStringValue(addr, casFeatCode_ID, v);}
-    
-  
  
   /** @generated */
   final Feature casFeat_start;
@@ -151,10 +127,6 @@ public class Gene_Type extends Annotation_Type {
   public Gene_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
-
- 
-    casFeat_ID = jcas.getRequiredFeatureDE(casType, "ID", "uima.cas.String", featOkTst);
-    casFeatCode_ID  = (null == casFeat_ID) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_ID).getCode();
 
  
     casFeat_start = jcas.getRequiredFeatureDE(casType, "start", "uima.cas.Integer", featOkTst);
