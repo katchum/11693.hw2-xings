@@ -38,7 +38,7 @@ public class AbnerAnnotator extends JCasAnnotator_ImplBase {
 	      gene.setStart(startIndex);
 	      gene.setEnd(endIndex);
 	      gene.setName(entity);
-	      gene.setConfidence(0.5);
+	      gene.setConfidence(0.25);
 	      gene.addToIndexes();
 	    }
 	}

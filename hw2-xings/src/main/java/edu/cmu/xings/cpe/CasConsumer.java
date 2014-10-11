@@ -76,7 +76,7 @@ public class CasConsumer extends CasConsumer_ImplBase {
     Iterator<String> keyit = sortedmap.keySet().iterator();
     while(keyit.hasNext()){
     	Gene resgene = sortedmap.get(keyit.next());
-    	if(resgene.getConfidence() > 0.5){
+    	if(resgene.getConfidence() > 0.4){
     	String output = String.format("%s|%d %d|%s", id.getID(), resgene.getStart(), resgene.getEnd(), resgene.getName());
     	res.add(output);
     	}
@@ -98,4 +98,22 @@ public class CasConsumer extends CasConsumer_ImplBase {
     }
     writer.close();
   }
+  
+  public int[] getTrueSE(String text, int start, int end) {
+	    int whitespaceCount = 0, pointer = 0;
+	    int[] pos = new int[2];
+	    for (; pointer < start; pointer++) {
+	      if (text.charAt(pointer) == ' ')
+	        whitespaceCount++;
+	    }
+	    pos[0] = start - whitespaceCount;
+
+	    for (; pointer < end; pointer++) {
+	      if (text.charAt(pointer) == ' ')
+	        whitespaceCount++;
+	    }
+	    pos[1] = end - whitespaceCount - 1;
+	    return pos;
+	  }
 }
+

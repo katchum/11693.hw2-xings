@@ -84,7 +84,7 @@ public class LingpipeAnnotator extends JCasAnnotator_ImplBase {
       gene.setStart(pos[0]);
       gene.setEnd(pos[1]);
       gene.setName(text.substring(chunk.start(), chunk.end()));
-      gene.setConfidence(0.5);
+      gene.setConfidence(0.25);
       gene.addToIndexes();
     }
   }
