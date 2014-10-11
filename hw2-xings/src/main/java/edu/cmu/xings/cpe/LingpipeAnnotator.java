@@ -52,7 +52,7 @@ public class LingpipeAnnotator extends JCasAnnotator_ImplBase {
   public void initialize(UimaContext aContext) throws ResourceInitializationException {
     try {
     	//need change
-      chunker = (Chunker) AbstractExternalizable.readResourceObject("/ne-en-bio-genetag.HmmChunker");
+      chunker = (Chunker) AbstractExternalizable.readResourceObject("/ne-en-bio-genia.TokenShapeChunker");
     } catch (IOException e) {
       e.printStackTrace();
     } catch (ClassNotFoundException e) {

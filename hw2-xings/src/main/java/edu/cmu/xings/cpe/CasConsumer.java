@@ -69,8 +69,6 @@ public class CasConsumer extends CasConsumer_ImplBase {
       }else{
     	  map.put(offset, gene);
       }
-//  	String output = String.format("%s|%d %d|%s|%s", id.getID(), gene.getStart(), gene.getEnd(), gene.getName(), gene.getCasProcessorId());
-//  	res.add(output);
     }
     // sort map by keys
     TreeMap<String, Gene> sortedmap = new TreeMap<String, Gene>(map);
