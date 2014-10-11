@@ -28,7 +28,7 @@ import edu.cmu.deiis.types.Gene;
 
 /**
  * 
- * GeneFinder Finds the named entity Gene in CAS text 
+ * LingpipeConfidenceAnnotator finds the named entity Gene in CAS text using the lingpipe genome model.
  * @author xings
  * 
  * 
@@ -47,7 +47,6 @@ public class LingpipeConfidenceAnnotator extends JCasAnnotator_ImplBase {
    * , which is one of the components of Lingpipe. It also loads the Genetag Model into
    * the annotator.
    * 
-   * @param aContext
    * 
    */
   public void initialize(UimaContext aContext) throws ResourceInitializationException {
@@ -68,7 +67,7 @@ public class LingpipeConfidenceAnnotator extends JCasAnnotator_ImplBase {
    * annotation of noun/phrase, adding gene annotation to them.
    * 
    * @param aJCas 
-   *      a JCAS that GeneAnnotator should process.
+   *      a JCAS that LingpipeConfidenceAnnotator should process.
    */
   public void process(JCas aJCas) throws AnalysisEngineProcessException {
     // get the text and chunk it

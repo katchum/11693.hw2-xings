@@ -29,23 +29,38 @@ import java.util.TreeMap;
 
 /**
  * 
- * CasConsumer outputs the result of annotation in the required format
+ * CasConsumer combines the annotations produced by all member of the aggregated AE, outputs the result of annotation in the required format
  * @author xings
  * 
  * */
 public class CasConsumer extends CasConsumer_ImplBase {
+	
+	/**
+	 * 
+	 * set CasProcessorId as mixed
+	 * set the output file
+	 * initiate a variable res that stores the result in all the JCas
+	 * 
+	 */
   public static final String OUTPUT = "OutputFile";
   public static final String MIXEDAE = "mixed";
   private List<String> res;
   
   /**
-   * initialize() 
+   * 
+   * initialize() produces a new arraylist of string which stores the result
+   * 
    */
   @Override
   public void initialize() {
     res = new ArrayList<String>();
   };
-
+  /**
+   * processCas(CAS) evaluates all the Gene annotation in the aCas and decide if it is a gene mention. 
+   * It stores the gene mention and their ID in (ArrayList<String>)res in the required format of the homework
+   *    @param aJCas 
+   *      a JCAS that CasConsumer should process.
+   */
   @Override
   public void processCas(CAS aCAS) throws ResourceProcessException {
     JCas jcas;
@@ -83,6 +98,13 @@ public class CasConsumer extends CasConsumer_ImplBase {
     }
   }
 
+  /**
+   * 
+   * collectionProcessComplete(ProcessTrace) outputs the content in (ArrayList<String>)res to the output file
+   *	@param arg0
+   *		the process trace
+   *
+   */
   public void collectionProcessComplete(ProcessTrace arg0) throws IOException,
           UnsupportedEncodingException {
     File oFile = new File((String) getConfigParameterValue(OUTPUT));
@@ -99,6 +121,14 @@ public class CasConsumer extends CasConsumer_ImplBase {
     writer.close();
   }
   
+  /**
+   * 
+   * @param text is the text in the JCas
+   * @param start is the starting point of a Gene
+   * @param end is the ending point of a Gene
+   * this function returns the offset of the Gene without space. Which is required in hw2.
+   * 
+   */
   public int[] getTrueSE(String text, int start, int end) {
 	    int whitespaceCount = 0, pointer = 0;
 	    int[] pos = new int[2];
