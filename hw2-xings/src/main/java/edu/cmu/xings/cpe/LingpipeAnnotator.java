@@ -51,8 +51,8 @@ public class LingpipeAnnotator extends JCasAnnotator_ImplBase {
    */
   public void initialize(UimaContext aContext) throws ResourceInitializationException {
     try {
-      chunker = (Chunker) AbstractExternalizable.readObject(new File(
-              "src/main/resources/ne-en-bio-genetag.HmmChunker"));
+    	//need change
+      chunker = (Chunker) AbstractExternalizable.readResourceObject("/ne-en-bio-genetag.HmmChunker");
     } catch (IOException e) {
       e.printStackTrace();
     } catch (ClassNotFoundException e) {
@@ -80,10 +80,29 @@ public class LingpipeAnnotator extends JCasAnnotator_ImplBase {
       Chunk chunk = it.next();
       Gene gene = new Gene(aJCas);
       gene.setCasProcessorId(LINGPIPE_ID);
-      gene.setStart(chunk.start());
-      gene.setEnd(chunk.end());
-      gene.setName(text.substring(gene.getStart(), gene.getEnd()));
+      int pos[] = getTrueSE(text, chunk.start(), chunk.end());
+      gene.setStart(pos[0]);
+      gene.setEnd(pos[1]);
+      gene.setName(text.substring(chunk.start(), chunk.end()));
+      gene.setConfidence(0.5);
       gene.addToIndexes();
     }
   }
+  public int[] getTrueSE(String text, int start, int end) {
+	    int whitespaceCount = 0, pointer = 0;
+	    int[] pos = new int[2];
+	    for (; pointer < start; pointer++) {
+	      if (text.charAt(pointer) == ' ')
+	        whitespaceCount++;
+	    }
+	    pos[0] = start - whitespaceCount;
+
+	    for (; pointer < end; pointer++) {
+	      if (text.charAt(pointer) == ' ')
+	        whitespaceCount++;
+	    }
+	    pos[1] = end - whitespaceCount - 1;
+	    return pos;
+	  }
 }
+

@@ -34,13 +34,13 @@ public class AbnerAnnotator extends JCasAnnotator_ImplBase {
 	      Gene gene = new Gene(aJCas);
 	      gene.setCasProcessorId(ABNER_ID);
 	      int startIndex = textNoSpaces.indexOf(entityNoSpaces);
-	      int endIndex = startIndex + entityNoSpaces.length();
+	      int endIndex = startIndex + entityNoSpaces.length() - 1;
 	      gene.setStart(startIndex);
 	      gene.setEnd(endIndex);
 	      gene.setName(entity);
+	      gene.setConfidence(0.25);
 	      gene.addToIndexes();
 	    }
-
 	}
 
 }

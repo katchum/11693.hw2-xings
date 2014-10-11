@@ -21,8 +21,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * 
@@ -32,10 +35,10 @@ import java.util.List;
  * 
  * */
 public class CasConsumer extends CasConsumer_ImplBase {
-  public static final String PARAM_OUTPUTFILE = "OutputFile";
-
+  public static final String OUTPUT = "OutputFile";
+  public static final String MIXEDAE = "mixed";
   private List<String> res;
-
+  
   @Override
   public void initialize() {
     res = new ArrayList<String>();
@@ -49,38 +52,40 @@ public class CasConsumer extends CasConsumer_ImplBase {
     } catch (CASException e) {
       throw new ResourceProcessException(e);
     }
-    String text = jcas.getDocumentText();
     Iterator<Annotation> idIt = jcas.getAnnotationIndex(ID.type).iterator();
     Iterator<Annotation> geneIt = jcas.getAnnotationIndex(Gene.type).iterator();
     ID id = (ID) idIt.next();
+    Map<String, Gene> map = new HashMap<String, Gene>();
+    
     while (geneIt.hasNext()) {
       Gene gene = (Gene) geneIt.next();
-      int[] pos = getTrueSE(text, gene.getStart(), gene.getEnd());
-      String output = String.format("%s|%d %d|%s", id.getID(), pos[0], pos[1], gene.getName());
-      res.add(output);
+      String offset = String.format("%d %d", gene.getStart(), gene.getEnd());
+      if (map.containsKey(offset)){
+    	  gene.setConfidence(gene.getConfidence()+map.get(offset).getConfidence());
+    	  gene.setCasProcessorId(MIXEDAE);
+    	  map.put(offset, gene);
+      }else{
+    	  map.put(offset, gene);
+      }
+//  	String output = String.format("%s|%d %d|%s|%s", id.getID(), gene.getStart(), gene.getEnd(), gene.getName(), gene.getCasProcessorId());
+//  	res.add(output);
     }
-  }
-
-  public int[] getTrueSE(String text, int start, int end) {
-    int whitespaceCount = 0, pointer = 0;
-    int[] pos = new int[2];
-    for (; pointer < start; pointer++) {
-      if (text.charAt(pointer) == ' ')
-        whitespaceCount++;
+    //sort map by keys
+    TreeMap<String, Gene> sortedmap = new TreeMap<String, Gene>(map);
+    //output all the genes in the map
+    Iterator<String> keyit = sortedmap.keySet().iterator();
+    while(keyit.hasNext()){
+    	Gene resgene = sortedmap.get(keyit.next());
+    	if(resgene.getConfidence() > 0.5){
+    	String output = String.format("%s|%d %d|%s", id.getID(), resgene.getStart(), resgene.getEnd(), resgene.getName());
+    	res.add(output);
+    	}
     }
-    pos[0] = start - whitespaceCount;
-
-    for (; pointer < end; pointer++) {
-      if (text.charAt(pointer) == ' ')
-        whitespaceCount++;
-    }
-    pos[1] = end - whitespaceCount - 1;
-    return pos;
   }
 
   public void collectionProcessComplete(ProcessTrace arg0) throws IOException,
           UnsupportedEncodingException {
-    File oFile = new File((String) getConfigParameterValue(PARAM_OUTPUTFILE));
+    File oFile = new File((String) getConfigParameterValue(OUTPUT));
     try {
       if (!oFile.exists())
         oFile.createNewFile();

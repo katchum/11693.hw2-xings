@@ -10,6 +10,9 @@
     <delegateAnalysisEngine key="aeLingpipeDescriptor">
       <import name="aeLingpipeDescriptor"/>
     </delegateAnalysisEngine>
+  <delegateAnalysisEngine key="aeLingpipeConfidenceDescriptor">
+      <import name="aeLingpipeConfidenceDescriptor"/>
+    </delegateAnalysisEngine>
   </delegateAnalysisEngineSpecifiers>
   <analysisEngineMetaData>
     <name>hw2-xings-aae</name>
@@ -22,6 +25,7 @@
       <fixedFlow>
         <node>aeAbnerDescriptor</node>
         <node>aeLingpipeDescriptor</node>
+      <node>aeLingpipeConfidenceDescriptor</node>
       </fixedFlow>
     </flowConstraints>
     <fsIndexCollection/>

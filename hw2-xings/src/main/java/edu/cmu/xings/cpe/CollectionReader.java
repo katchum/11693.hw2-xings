@@ -40,7 +40,7 @@ public class CollectionReader extends CollectionReader_ImplBase {
    * Name of configuration parameter that must be set to the path of a directory containing input
    * files.
    */
-  public static final String PARAM_INPUTFILE = "InputFile";
+  public static final String PARAM_INPUTFILE = "Inputdirectory";
 
   private int mCurrentIndex;
 
